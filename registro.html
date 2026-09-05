@@ -27,6 +27,13 @@
   <main class="auth-layout">
 
     <aside class="auth-panel">
+      <h2>Arma tu pedido con calma.</h2>
+      <p>Con tu cuenta puedes guardar tu carrito, revisar el estado de tus pedidos y volver a comprar en un par de clics.</p>
+      <ul class="auth-benefits">
+        <li>Seguimiento de tu pedido en tiempo real</li>
+        <li>Historial de compras y boletas</li>
+        <li>Ofertas exclusivas para clientes registrados</li>
+      </ul>
     </aside>
 
     <section class="auth-form-section">
@@ -79,9 +86,11 @@
           <span class="field-error" id="error-password-confirm" aria-live="polite"></span>
         </div>
 
-        <button type="submit">Crear cuenta</button>
+        <button type="submit" class="btn btn-primary">Crear cuenta</button>
 
       </form>
+
+      <p class="form-success" id="mensaje-exito-registro" hidden>¡Cuenta creada correctamente! Ya puedes iniciar sesión.</p>
 
       <p class="auth-switch">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
     </section>

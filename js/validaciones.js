@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   inicializarValidacionRegistro();
+  inicializarValidacionLogin();
 });
 
 
@@ -10,15 +11,18 @@ function mostrarError(input, mensaje) {
   if (mensaje) {
     if (campo) campo.classList.add('has-error');
     if (spanError) spanError.textContent = mensaje;
+    input.setAttribute('aria-invalid', 'true');
   } else {
     if (campo) campo.classList.remove('has-error');
     if (spanError) spanError.textContent = '';
+    input.removeAttribute('aria-invalid');
   }
 }
 
+
 function inicializarValidacionRegistro() {
   const form = document.getElementById('form-registro');
-  if (!form) return; 
+  if (!form) return;
 
   const nombre = document.getElementById('nombre');
   const correo = document.getElementById('correo');
@@ -96,7 +100,77 @@ function inicializarValidacionRegistro() {
       form.hidden = true;
       if (mensajeExito) mensajeExito.hidden = false;
     } else {
+      const primerInvalido = campos.find(function (input) {
+        const campo = input.closest('.form-field');
+        return campo && campo.classList.contains('has-error');
+      });
+      if (primerInvalido) primerInvalido.focus();
+    }
+  });
+}
 
+
+function inicializarValidacionLogin() {
+  const form = document.getElementById('form-login');
+  if (!form) return;
+  const correo = document.getElementById('correo');
+  const password = document.getElementById('password');
+  const mensajeExito = document.getElementById('mensaje-exito-login');
+
+  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validadores = {
+    correo: function (valor) {
+      if (valor.trim() === '') {
+        return 'Ingresa tu correo electrónico.';
+      }
+      if (!regexCorreo.test(valor.trim())) {
+        return 'Ingresa un correo válido, por ejemplo nombre@dominio.com.';
+      }
+      return '';
+    },
+    password: function (valor) {
+      if (valor === '') {
+        return 'Ingresa tu contraseña.';
+      }
+      return '';
+    }
+  };
+
+  function validarCampo(input) {
+    const validar = validadores[input.id];
+    if (!validar) return true;
+
+    const mensaje = validar(input.value);
+    mostrarError(input, mensaje);
+    return mensaje === '';
+  }
+
+  const campos = [correo, password];
+
+  campos.forEach(function (input) {
+    input.addEventListener('blur', function () {
+      validarCampo(input);
+    });
+
+    input.addEventListener('input', function () {
+      const campo = input.closest('.form-field');
+      if (campo && campo.classList.contains('has-error')) {
+        validarCampo(input);
+      }
+    });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const resultados = campos.map(validarCampo);
+    const formularioValido = resultados.every(Boolean);
+
+    if (formularioValido) {
+      form.hidden = true;
+      if (mensajeExito) mensajeExito.hidden = false;
+    } else {
       const primerInvalido = campos.find(function (input) {
         const campo = input.closest('.form-field');
         return campo && campo.classList.contains('has-error');

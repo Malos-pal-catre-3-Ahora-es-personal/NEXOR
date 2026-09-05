@@ -11,6 +11,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo">NEXOR</a>
@@ -24,7 +26,7 @@
     </div>
   </header>
 
-  <main class="auth-layout">
+  <main class="auth-layout" id="main-content">
 
     <aside class="auth-panel">
       <h2>Arma tu pedido con calma.</h2>
@@ -44,21 +46,21 @@
 
         <div class="form-field">
           <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          <span class="field-hint">Tal como quieres que aparezca en tu perfil.</span>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required aria-describedby="hint-nombre error-nombre">
+          <span class="field-hint" id="hint-nombre">Tal como quieres que aparezca en tu perfil.</span>
           <span class="field-error" id="error-nombre" aria-live="polite"></span>
         </div>
 
         <div class="form-field">
           <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" name="correo" autocomplete="email" required>
-          <span class="field-hint">Lo usarás para iniciar sesión.</span>
+          <input type="email" id="correo" name="correo" autocomplete="email" required aria-describedby="hint-correo error-correo">
+          <span class="field-hint" id="hint-correo">Lo usarás para iniciar sesión.</span>
           <span class="field-error" id="error-correo" aria-live="polite"></span>
         </div>
 
         <div class="form-field">
           <label for="region">Región</label>
-          <input type="text" id="region" name="region" list="regiones" autocomplete="off">
+          <input type="text" id="region" name="region" list="regiones" autocomplete="off" aria-describedby="hint-region error-region">
           <datalist id="regiones">
             <option value="Región Metropolitana de Santiago">
             <option value="Región de Valparaíso">
@@ -68,21 +70,21 @@
             <option value="Región de Antofagasta">
             <option value="Región de Coquimbo">
           </datalist>
-          <span class="field-hint">Empieza a escribir para ver sugerencias.</span>
+          <span class="field-hint" id="hint-region">Empieza a escribir para ver sugerencias.</span>
           <span class="field-error" id="error-region" aria-live="polite"></span>
         </div>
 
         <div class="form-field">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required>
-          <span class="field-hint">Mínimo 8 caracteres.</span>
+          <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required aria-describedby="hint-password error-password">
+          <span class="field-hint" id="hint-password">Mínimo 8 caracteres.</span>
           <span class="field-error" id="error-password" aria-live="polite"></span>
         </div>
 
         <div class="form-field">
           <label for="password-confirm">Confirmar contraseña</label>
-          <input type="password" id="password-confirm" name="password-confirm" autocomplete="new-password" minlength="8" required>
-          <span class="field-hint">Repite la misma contraseña.</span>
+          <input type="password" id="password-confirm" name="password-confirm" autocomplete="new-password" minlength="8" required aria-describedby="hint-password-confirm error-password-confirm">
+          <span class="field-hint" id="hint-password-confirm">Repite la misma contraseña.</span>
           <span class="field-error" id="error-password-confirm" aria-live="polite"></span>
         </div>
 
